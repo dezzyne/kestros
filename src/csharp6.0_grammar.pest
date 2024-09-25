@@ -1,0 +1,95 @@
+compilation_unit = {
+    namespace_member_declaration*
+}
+
+namespace_member_declaration = {
+    type_declaration
+}
+
+type_declaration = {
+    class_declaration
+}
+
+class_declaration = {
+    class_modifier
+    ~ "partial"?
+    ~ "class"
+    ~ class_body
+}
+
+
+
+class_modifier = @{
+    "new"
+    | "public"
+    | "protected"
+    | "private"
+    | "internal"
+    | "private"
+    | "abstract"
+    | "sealed"
+    | "static"
+    | unsafe_modifier
+}
+
+unsafe_modifier = @{
+    "unsafe"
+}
+
+class_body = {
+    "{"
+    ~ class_member_declaration
+    ~ "}"
+}
+
+class_member_declaration = {
+    constant_declaration
+}
+
+constant_declaration = {
+    "const"
+    ~ type
+    ~ constant_declarators
+    ~ ";"
+}
+
+type = {
+    "int"
+}
+
+constant_declarators = {
+    constant_declarator (',' constant_declarator)*
+}
+
+constant_declarator = {
+    identifier
+    ~ '='
+    ~ constant_expression
+}
+
+identifier = {
+    simple_identifier
+}
+
+simple_identifier = {
+    available_identifier
+}
+
+available_identifier = {
+    basic_identifier
+}
+
+basic_identifier = {
+    identifier_start_character
+    ~ identifier_part_character*
+}
+
+identifier_start_character = {
+
+}
+
+WHITESPACE = _{ " " | NEWLINE }
+COMMENT = _{ "/*" ~ (!"*/" ~ ANY)* ~ "*/" }
+
+DEFAULT = { "default" }
+NULL =  { "null" }

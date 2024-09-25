@@ -1,0 +1,11 @@
+public class {
+
+}
+
+protected partial class {
+
+}
+
+unsafe class {
+
+}
